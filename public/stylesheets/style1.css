@@ -1,0 +1,34 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+h1 {
+text-align: center;
+color:#008CBA;
+}
+
+.ftable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.ftable td, .ftable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.ftable tr:nth-child(even){background-color: #e7e5fd;}
+
+.ftable tr:hover {background-color: rgb(255, 203, 203);}
+
+.ftable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color:black;
+  color: white;
+}
+a {
+  color: #00B7FF;
+}

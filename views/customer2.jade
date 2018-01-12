@@ -1,0 +1,50 @@
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='shortcut icon', href='')
+    script(rel='javascript',src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+    
+    script.
+      $(document).ready(function () {
+      $(".b1").click(function () {
+      $.ajax({
+      type: "GET",
+      url: 'http://192.168.2.128:3300/gosite/5a33764ec8c8312d08aae483?status=false&skip=0&limit=3',
+      processData: false,
+      contentType: 'application/json',
+      success: function (response) {
+   
+         for(var i =0 ; i<response.length ; i++){
+          // var hello =document.createElement("TD");
+          var hello.innerHTML=response[i]._id;
+         //console.log(response[i]._id);
+         console.log(response[i].first_name); 
+        }
+      //alert(response[0]._id);
+      },
+      error: function (error) {
+      console.log('error ' + error);
+      }
+      });
+      });
+      })
+  body
+    h1 Customer
+    table.customers
+      thead
+        tr
+          th Name
+          th Email
+          th Phone No
+          th Id
+          
+      tbody
+        if data.length
+          each d in data
+            tr
+              td #{d.contactFirstName} #{d.contactLastName}
+              td #{d.contactEmail}
+              td #{d.contactPhone}
+              td #{d.customerId}
+    button.b1 Click Me!!!!!

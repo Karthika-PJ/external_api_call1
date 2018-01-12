@@ -1,0 +1,23 @@
+html
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(data="#{data}")
+    body
+        table.ftable
+            thead
+                tr
+                    th Name
+                    th Email
+                    th Appoinment Time
+                    th Status
+                    th Create Date
+            tbody
+                if data.length
+                    each d in data
+                        tr
+                            td #{d.first_name} #{d.last_name}
+                            td #{d.customer_email}
+                            td #{d.appointment_time}
+                            td #{d.status}	
+                            td #{d.created_at}

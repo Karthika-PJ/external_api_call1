@@ -1,0 +1,120 @@
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='shortcut icon', href='')
+    script(rel='javascript',src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+
+    script.
+      $(document).ready(function () {
+        $(".b1").click(function () {
+          status=document.getElementById("status").value;
+          skip=document.getElementById("skip").value;
+          limit=document.getElementById("limit").value;
+          $.ajax({
+            type: "GET",
+            url: 'http://192.168.2.128:3300/gosite/5927c7aa08eba31dcb1a3b7d?status='+status+'&skip='+skip+'&limit='+limit,
+            processData: false,
+            contentType: 'application/json',
+            success: function (response) {
+              document.getElementById("custList").innerHTML="";
+              document.getElementById("custList").appendChild(document.createElement("TABLE"));
+              var row=document.createElement("TR");
+              var name=document.createElement("TH");
+              name.innerHTML="NAME";
+              var email=document.createElement("TH");
+              email.innerHTML="EMAIL-ID";
+              var ap_time=document.createElement("TH");
+              ap_time.innerHTML="APPOINMENT-TIME";
+              var status=document.createElement("TH");
+              status.innerHTML="STATUS";
+              var cr_date=document.createElement("TH");
+              cr_date.innerHTML="CREATE-DATE";
+              row.appendChild(name);
+              row.appendChild(email);
+              row.appendChild(ap_time);
+              row.appendChild(status);
+              row.appendChild(cr_date);
+              document.getElementById("custList").appendChild(row);
+              for(var i =0 ; i<response.length ; i++)
+              {
+                var row=document.createElement("TR");
+                var name=document.createElement("TD");
+                name.innerHTML=response[i].first_name +" "  +response[i].last_name;
+                var email=document.createElement("TD");
+                email.innerHTML=response[i].customer_email;
+                var ap_time=document.createElement("TD");
+                ap_time.innerHTML=response[i].appointment_time;
+                var status=document.createElement("TD");
+                status.innerHTML=response[i].status;
+                var cr_date=document.createElement("TD");
+                cr_date.innerHTML=response[i].created_at;
+                row.appendChild(name);
+                row.appendChild(email);
+                row.appendChild(ap_time);
+                row.appendChild(status);
+                row.appendChild(cr_date);
+                document.getElementById("custList").appendChild(row);
+                console.log(response[i]._id);
+                console.log(response[i].first_name);
+              }
+            },
+            error: function (error) {
+              console.log('error ' + error);
+              }
+            });
+          });
+        })
+  body
+    h1 Customer Details
+    table.customers
+      thead
+        tr
+          th Name
+          th Email
+          th Phone No
+          th Id
+
+      tbody
+        if data.length
+          each d in data
+            tr
+              td #{d.contactFirstName} #{d.contactLastName}
+              td #{d.contactEmail}
+              td #{d.contactPhone}
+              td #{d.customerId}
+    p Paging
+            select#status(name='status')
+                option(value='', selected='', disabled='', hidden='') 
+                |   
+                option(value='true') No
+                |   
+                option(value='false') yes
+            select#skip(name='skip')
+                option(value='', selected='', disabled='', hidden='') 
+                |   
+                option(value='0') 0
+                |   
+                option(value='10') 10
+                |   
+                option(value='20') 20
+                |   
+                option(value='30') 30
+                |   
+                option(value='40') 40
+            select#limit(name='limit')
+                option(value='', selected='', disabled='', hidden='')
+                |   
+                option(value='5') 5
+                |   
+                option(value='10') 10
+                |   
+                option(value='15') 15
+                |   
+                option(value='20') 20
+                |   
+                option(value='25') 25   
+              
+    button.b1 Click Me!!!!!
+    h1 Gosite User Details
+    div#custList(style="align=center")
